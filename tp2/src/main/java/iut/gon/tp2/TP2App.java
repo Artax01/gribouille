@@ -1,6 +1,7 @@
 package iut.gon.tp2;
 
 import javafx.application.Application;
+
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -12,6 +13,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Optional;
 
 public class TP2App extends Application {
 
@@ -43,7 +45,13 @@ public class TP2App extends Application {
   /** Prépare la fenêtre pour demander confirmation avant fermeture */
   private void prepareFermeture(Stage stage) {
     stage.setOnCloseRequest(event -> {
-      //TODO confirmer ou consommer l'événement
+    	Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Voulez-vous vraiment fermer l'application ?", ButtonType.YES, ButtonType.NO);
+    	alert.setTitle("Fermeture de l'application");
+    	Optional<ButtonType> result = alert.showAndWait();
+    	
+    	if (result.get() == ButtonType.NO) {
+    		event.consume();
+    	}
     });
   }
 
@@ -87,19 +95,19 @@ public class TP2App extends Application {
   /** Ajoute tous les éléments de gauche dans la liste de droite
    Active le bouton "Retirer tout" et désactive le bouton "Ajouter tout" */
   private void onAjouteTout(ActionEvent actionEvent) {
-    droite.getItems().addAll(gauche.getItems());
-    gauche.getItems().clear();
-    ajouteTout.setDisable(true);
-    retireTout.setDisable(false);
+	  droite.getItems().addAll(gauche.getItems());
+	  gauche.getItems().clear();
+	  ajouteTout.setDisable(true);
+	  retireTout.setDisable(false);
   }
 
   /** Ajoute tous les éléments de droite dans la liste de gauche
    Active le bouton "Ajouter tout" et désactive le bouton "Retirer tout" */
   private void onRetireTout(ActionEvent actionEvent) {
-    gauche.getItems().addAll(droite.getItems());
-    droite.getItems().clear();
-    retireTout.setDisable(true);
-    ajouteTout.setDisable(false);
+	  gauche.getItems().addAll(droite.getItems());
+	  droite.getItems().clear();
+	  retireTout.setDisable(true);
+	  ajouteTout.setDisable(false);
   }
 
   /** Prépare les menus et leurs événements */
@@ -131,7 +139,7 @@ public class TP2App extends Application {
    Active le bouton "Ajouter tout"
    */
   private void prepareListe() {
-	  gauche.getItems().addAll("test", "test2", "test3");
+	  gauche.getItems().addAll("item", "item2", "item3");
 	  ajouteTout.setDisable(false);
   }
 
