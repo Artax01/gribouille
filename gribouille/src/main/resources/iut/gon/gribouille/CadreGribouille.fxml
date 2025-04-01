@@ -59,8 +59,7 @@
     <!-- LEFT CONTENT -->
     <left>
     	<Pane>
-    		<Canvas>
-     		</Canvas>
+    		<Canvas height="600" width="600"/>
      	</Pane>
 	</left>
     <!-- RIGHT CONTENT -->
