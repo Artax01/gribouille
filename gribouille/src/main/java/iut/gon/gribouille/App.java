@@ -1,10 +1,12 @@
 package iut.gon.gribouille;
 
 import javafx.application.Application;
+
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 
@@ -20,6 +22,12 @@ public class App extends Application {
         scene = new Scene(loadFXML("CadreGribouille"), 640, 480);
         stage.setScene(scene);
         stage.show();
+        
+        stage.addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, event -> {
+        	if (!Dialogues.confirmation()) {
+        		event.consume();
+        	}
+        });
     }
 
     static void setRoot(String fxml) throws IOException {
