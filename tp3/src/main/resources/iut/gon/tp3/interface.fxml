@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+
+<BorderPane xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iut.gon.tp3.GrilleController">
+   <center>
+      <GridPane fx:id="grille" gridLinesVisible="true" hgap="1" vgap="1">
+         <rowConstraints>
+            <RowConstraints valignment="CENTER" minHeight="10.0" percentHeight="33.33" prefHeight="30.0"  />
+            <RowConstraints valignment="CENTER" minHeight="10.0" percentHeight="33.33" prefHeight="30.0"  />
+            <RowConstraints valignment="CENTER" minHeight="10.0" percentHeight="33.33" prefHeight="30.0"  />
+         </rowConstraints>
+         <columnConstraints>
+            <ColumnConstraints halignment="CENTER" minWidth="10.0" percentWidth="33.33" prefWidth="100.0" />
+            <ColumnConstraints halignment="CENTER" minWidth="10.0" percentWidth="33.33" prefWidth="100.0" />
+            <ColumnConstraints halignment="CENTER" minWidth="10.0" percentWidth="33.33" prefWidth="100.0" />
+         </columnConstraints>
+         <padding>
+            <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+         </padding>
+      </GridPane>
+   </center>
+</BorderPane>
