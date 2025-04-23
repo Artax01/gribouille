@@ -27,14 +27,14 @@ public class GrilleController implements Initializable {
 				int colonne = col; 
 				
 				modele.setCase(lg, col, String.format("L%dC%d", lg, col));
-				Label label = new Label(modele.getCase(lg, col));
+				Label label = new Label();
 				
+				label.textProperty().bind(modele.getCase(ligne, colonne));
 				label.setMaxWidth(1000);
 				label.setMaxHeight(1000);
 				label.setAlignment(Pos.CENTER);
 				
 				label.setOnMouseClicked(event -> {
-					label.setText("bonjour");
 					modele.setCase(ligne, colonne, "bonjour");
 				});
 				
