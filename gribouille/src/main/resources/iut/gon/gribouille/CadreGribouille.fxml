@@ -19,7 +19,7 @@
 <?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.shape.Rectangle?>
 
-<BorderPane xmlns="http://javafx.com/javafx/21.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iut.gon.gribouille.Controller">
+<BorderPane xmlns="http://javafx.com/javafx/21.0.2" xmlns:fx="http://javafx.com/fxml/1">
 	<!-- TOP CONTENT -->
 	<top>
 		<MenuBar>
