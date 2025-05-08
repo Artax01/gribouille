@@ -31,12 +31,14 @@ public class GrilleController implements Initializable {
 	private @FXML GridPane grille;
 	private @FXML HBox statut;
 	private @FXML Label joueur;
+	private @FXML MenusController menusController;
 
 	private Label[][] contenu = new Label[3][3];
 
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		menusController.setParams(modele, table);
 		grille.setStyle("-fx-background-color: seashell");
 		for (int l = 0; l < 3; ++l) {
 			for (int c = 0; c < 3; ++c) {
@@ -81,30 +83,6 @@ public class GrilleController implements Initializable {
 		else {
 			table.ajouteNulle();
 		}
-		onMenuTable(null);
-
-	}
-
-	@FXML
-	public void onMenuNouvelle(ActionEvent evt) {
-		modele.nouvellePartie();
-	}
-	
-	@FXML
-	public void onMenuTable(ActionEvent evt) {
-		FXMLLoader fxmlLoader = new FXMLLoader(Morpion.class.getResource("table.fxml"));
-		try {
-			grille.getScene().setRoot(fxmlLoader.load());
-		}
-		catch (IOException e) {
-			e.printStackTrace();
-		}
-		TableController tableController = fxmlLoader.getController();
-		tableController.setScores(table);
-	}
-
-	@FXML
-	public void onMenuQuitter(ActionEvent evt) {
-		Platform.exit();
+		menusController.onMenuTable(null);
 	}
 }
