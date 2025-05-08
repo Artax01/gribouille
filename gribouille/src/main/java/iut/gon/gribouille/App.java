@@ -24,27 +24,17 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("CadreGribouille"), 640, 480);
+        stage.setTitle("Gribouille");
         stage.setScene(scene);
         stage.show();
         
-        stage.addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, event -> {
+        stage.addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, (event) -> {
         	if (!Dialogues.confirmation()) {
         		event.consume();
         	}
         });
         
         Canvas dessin = (Canvas) scene.lookup("Canvas");
-
-        
-        dessin.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> {
-        	prevX = event.getX();
-        	prevY = event.getY();
-        });
-        dessin.addEventFilter(MouseEvent.MOUSE_DRAGGED, event -> {
-        	dessin.getGraphicsContext2D().strokeLine(prevX, prevY, event.getX(), event.getY());
-        	prevX = event.getX();
-        	prevY = event.getY();
-        });
     }
 
     static void setRoot(String fxml) throws IOException {

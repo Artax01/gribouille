@@ -9,6 +9,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 
@@ -31,9 +32,23 @@ public class Controller implements Initializable {
     @FXML private Label yCoordinate;
     @FXML private Label epaisseur;
     
+    private double prevX;
+    private double prevY;
+    
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		canvas.heightProperty().bind(pane.heightProperty());
 		canvas.widthProperty().bind(pane.widthProperty());
 	}
+	
+	public void onMousePressed(MouseEvent evt) {
+    	prevX = evt.getX();
+    	prevY = evt.getY();
+    }
+    
+    public void onMouseDragged(MouseEvent evt) {
+    	canvas.getGraphicsContext2D().strokeLine(prevX, prevY, evt.getX(), evt.getY());
+    	prevX = evt.getX();
+    	prevY = evt.getY();
+    }
 }

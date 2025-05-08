@@ -52,7 +52,6 @@
 	 					<ToggleGroup fx:id="premier"/>
 	 				</toggleGroup>
 	 			</RadioMenuItem>
-
 	 			<RadioMenuItem text="Etoile" toggleGroup="$premier"/>
 		 	</Menu>
 		 	<Menu text="Aide">
@@ -63,7 +62,7 @@
     <!-- CONTENT -->
     <center>
     	<Pane fx:id="pane">
-    		<Canvas fx:id="canvas"/>
+    		<Canvas fx:id="canvas" onMousePressed="#onMousePressed" onMouseDragged="#onMouseDragged"/>
      	</Pane>
 	</center>
     <!-- RIGHT CONTENT -->
