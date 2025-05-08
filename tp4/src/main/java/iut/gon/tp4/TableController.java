@@ -19,8 +19,13 @@ public class TableController {
 	@FXML public TableView<Scores.Entree> table;
 
 
-	public void onFermer(ActionEvent event) {
-		//TODO appeler la grille
+	public void onFermer(ActionEvent event) throws IOException {
+		FXMLLoader fxmlLoader = new FXMLLoader(Morpion.class.getResource("grille.fxml"));
+		
+		GrilleController controller = new GrilleController(scores);
+		fxmlLoader.setController(controller);
+		
+		table.getScene().setRoot(fxmlLoader.load());
 	}
 
 	public void onReinit(ActionEvent event) {

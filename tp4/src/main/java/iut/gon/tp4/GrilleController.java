@@ -71,9 +71,18 @@ public class GrilleController implements Initializable {
 	}
 
 	private void onGagne(String joueur) {
-		//TODO demander le nom du joueur
-		//TODO modifier scores
-		//TODO appeler la table des scores
+		if (joueur != null) {
+			TextInputDialog textInputDialog = new TextInputDialog();
+			textInputDialog.setTitle("Choix du nom");
+			textInputDialog.setContentText("Entrez le nom du gagnant : ");
+			joueur = textInputDialog.showAndWait().orElse("");
+			table.ajouteVictoire(joueur);
+		}
+		else {
+			table.ajouteNulle();
+		}
+		onMenuTable(null);
+
 	}
 
 	@FXML
@@ -82,9 +91,14 @@ public class GrilleController implements Initializable {
 	}
 	
 	@FXML
-	public void onMenuTable(ActionEvent evt) throws IOException {
+	public void onMenuTable(ActionEvent evt) {
 		FXMLLoader fxmlLoader = new FXMLLoader(Morpion.class.getResource("table.fxml"));
-		grille.getScene().setRoot(fxmlLoader.load());
+		try {
+			grille.getScene().setRoot(fxmlLoader.load());
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
 		TableController tableController = fxmlLoader.getController();
 		tableController.setScores(table);
 	}
