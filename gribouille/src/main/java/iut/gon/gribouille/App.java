@@ -22,7 +22,8 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-    	controller = new Controller();
+    	Dessin dessin = new Dessin();
+    	controller = new Controller(dessin);
     	
         scene = new Scene(loadFXML("CadreGribouille"), 640, 480);
         stage.setTitle("Gribouille");
@@ -34,9 +35,6 @@ public class App extends Application {
         		event.consume();
         	}
         });
-        
-        /** Canvas dessin = (Canvas) scene.lookup("Canvas"); */
-        Dessin dessin = new Dessin();
     }
 
     static void setRoot(String fxml) throws IOException {
