@@ -7,6 +7,7 @@
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuItem?>
@@ -18,7 +19,7 @@
 <?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.shape.Rectangle?>
 
-<BorderPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane xmlns="http://javafx.com/javafx/21.0.2" xmlns:fx="http://javafx.com/fxml/1">
 	<!-- TOP CONTENT -->
 	<top>
 		<MenuBar>
@@ -31,11 +32,11 @@
 		 	</Menu>
 		 	<Menu text="Outils">
 	 			<Menu text="Epaisseur">
-	 				<fx:define>
-	 					<ToggleGroup fx:id="second"/>
-	 				</fx:define>
-
- 					<RadioMenuItem text="1" toggleGroup="$second" selected="true"/>
+	 				<RadioMenuItem text="1" selected="true">
+ 						<toggleGroup>
+	 						<ToggleGroup fx:id="second"/>
+	 					</toggleGroup>
+ 					</RadioMenuItem>
  					<RadioMenuItem text="2" toggleGroup="$second"/>
  					<RadioMenuItem text="3" toggleGroup="$second"/>
  					<RadioMenuItem text="4" toggleGroup="$second"/>
@@ -45,10 +46,12 @@
  					<RadioMenuItem text="8" toggleGroup="$second"/>
  					<RadioMenuItem text="9" toggleGroup="$second"/>
 	 			</Menu>
-	 			<fx:define>
-	 				<ToggleGroup fx:id="premier"/>
-	 			</fx:define>
-	 			<RadioMenuItem text="Crayon" toggleGroup="$premier" selected="true"/>
+	 			
+	 			<RadioMenuItem text="Crayon" selected="true">
+	 				<toggleGroup>
+	 					<ToggleGroup fx:id="premier"/>
+	 				</toggleGroup>
+	 			</RadioMenuItem>
 	 			<RadioMenuItem text="Etoile" toggleGroup="$premier"/>
 		 	</Menu>
 		 	<Menu text="Aide">
@@ -56,52 +59,57 @@
 		 	</Menu>
 		 </MenuBar>
 	</top>
-    <!-- LEFT CONTENT -->
-    <left>
-    	<Pane>
-    		<Canvas height="600" width="600"/>
+    <!-- CONTENT -->
+    <center>
+    	<Pane fx:id="pane">
+    		<Canvas fx:id="canvas" onMousePressed="#onMousePressed" onMouseDragged="#onMouseDragged" onMouseMoved="#onMouseMoved"/>
      	</Pane>
-	</left>
+	</center>
     <!-- RIGHT CONTENT -->
     <right>
     	<VBox style="-fx-background-color: lightgrey" >
-    		<ColorPicker/>
+    		<ColorPicker fx:id="colorPicker"/>
      		<TilePane VBox.vgrow="always" prefColumns="2" alignment="top_center">
- 				<Rectangle fill="red" stroke="black" strokeWidth="3" height="65" width="65"/>
- 				<Rectangle fill="lime" stroke="black" height="65" width="65"/>
-				<Rectangle fill="blue" stroke="black" height="65" width="65"/>
- 				<Rectangle fill="cyan" stroke="black" height="65" width="65"/>
- 				<Rectangle fill="pink" stroke="black" height="65" width="65"/>
- 				<Rectangle fill="yellow" stroke="black" height="65" width="65"/>
- 				<Rectangle fill="black" stroke="black" height="65" width="65"/>
- 				<Rectangle fill="white" stroke="black" height="65" width="65"/>
+ 				<Rectangle fx:id="rect_red" fill="red" stroke="black" strokeWidth="3" height="65" width="65"/>
+ 				<Rectangle fx:id="rect_lime" fill="lime" stroke="black" height="65" width="65"/>
+				<Rectangle fx:id="rect_blue" fill="blue" stroke="black" height="65" width="65"/>
+ 				<Rectangle fx:id="rect_cyan" fill="cyan" stroke="black" height="65" width="65"/>
+ 				<Rectangle fx:id="rect_pink" fill="pink" stroke="black" height="65" width="65"/>
+ 				<Rectangle fx:id="rect_yellow" fill="yellow" stroke="black" height="65" width="65"/>
+ 				<Rectangle fx:id="rect_black" fill="black" stroke="black" height="65" width="65"/>
+ 				<Rectangle fx:id="rect_white" fill="white" stroke="black" height="65" width="65"/>
      		</TilePane>
      	</VBox>
      </right>
      <!-- BOTTOM CONTENT -->
      <bottom>
-     	<GridPane>
+     	<GridPane style="-fx-background-color: d9d9d9;">
 	     	<columnConstraints>
-	        	<ColumnConstraints percentWidth="20" />
-	        	<ColumnConstraints percentWidth="20" />
-	        	<ColumnConstraints percentWidth="20" />
-	        	<ColumnConstraints percentWidth="20" />
-	        	<ColumnConstraints percentWidth="20" />
+	        	<ColumnConstraints percentWidth="20" halignment="CENTER"/>
+	        	<ColumnConstraints percentWidth="20" halignment="CENTER"/>
+	        	<ColumnConstraints percentWidth="20" halignment="CENTER"/>
+	        	<ColumnConstraints percentWidth="20" halignment="CENTER"/>
+	        	<ColumnConstraints percentWidth="20" halignment="CENTER"/>
 	    	</columnConstraints>
-     		<HBox GridPane.columnIndex="0">
-     			<Label text="x:"/>
-     			<Label text="0"/>
-     		</HBox>
-     		<HBox GridPane.columnIndex="1">
-     			<Label text="y:"/>
-     			<Label text="0"/>
-     		</HBox>
-     		<HBox  GridPane.columnIndex="2">
-     			<Label text="Epaisseur:"/>
-     			<Label text="3"/>
-     		</HBox>
-     		<Label text="Outil" GridPane.columnIndex="3"/>
-     		<Label text="Couleur" GridPane.columnIndex="4"/>
+	    	<rowConstraints>
+	    		<RowConstraints minHeight="10.0" prefHeight="30.0"/>
+	    	</rowConstraints>
+			<children>
+	     		<HBox GridPane.columnIndex="0" alignment="CENTER">
+	     			<Label text="x:"/>
+	     			<Label fx:id="xCoordinate" text=""/>
+	     		</HBox>
+	     		<HBox GridPane.columnIndex="1" alignment="CENTER">
+	     			<Label text="y:"/>
+	     			<Label fx:id="yCoordinate" text=""/>
+	     		</HBox>
+	     		<HBox  GridPane.columnIndex="2" alignment="CENTER">
+	     			<Label text="Epaisseur:"/>
+	     			<Label fx:id="epaisseur" text=""/>
+	     		</HBox>
+	     		<Label text="Outil" GridPane.columnIndex="3" textAlignment="CENTER"/>
+	     		<Label text="Couleur" GridPane.columnIndex="4"/>
+	     	</children>
      	</GridPane>
      </bottom>
 </BorderPane>
