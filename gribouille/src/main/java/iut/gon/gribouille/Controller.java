@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import iut.gon.gribouille.modele.*;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
@@ -38,12 +39,18 @@ public class Controller implements Initializable {
     private Dessin dessin;
     private Trace trace;
     
+    private SimpleDoubleProperty xProp = new SimpleDoubleProperty();
+    private SimpleDoubleProperty yProp = new SimpleDoubleProperty();
+    
     public Controller(Dessin dessin) {
     	this.dessin = dessin;
     }
     
 	@Override
-	public void initialize(URL location, ResourceBundle resources) {		
+	public void initialize(URL location, ResourceBundle resources) {
+		xCoordinate.textProperty().bind(xProp.asString("%.0f"));
+		yCoordinate.textProperty().bind(yProp.asString("%.0f"));
+		
 		pane.layoutBoundsProperty().addListener((observable, oldValue, newValue) -> {
 			pane.setPrefHeight(newValue.getHeight());
 			pane.setPrefWidth(newValue.getWidth());
@@ -53,7 +60,7 @@ public class Controller implements Initializable {
 		canvas.widthProperty().bind(pane.widthProperty());
 		
 		canvas.heightProperty().addListener((observableValue, oldValue, newValue) -> {
-			canvas.getGraphicsContext2D().clearRect(0, 0, canvas.getHeight(), canvas.getWidth());
+			canvas.getGraphicsContext2D().clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 			for (Figure f : dessin.getFigures()) {
 				for (int i = 1; i < f.getPoints().size(); i++) {
 					double x0 = f.getPoints().get(i-1).getX();
@@ -67,7 +74,7 @@ public class Controller implements Initializable {
 		});
 		
 		canvas.widthProperty().addListener((observableValue, oldValue, newValue) -> {
-			canvas.getGraphicsContext2D().clearRect(0, 0, canvas.getHeight(), canvas.getWidth());
+			canvas.getGraphicsContext2D().clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 			for (Figure f : dessin.getFigures()) {
 				for (int i = 1; i < f.getPoints().size(); i++) {
 					double x0 = f.getPoints().get(i-1).getX();
@@ -84,15 +91,27 @@ public class Controller implements Initializable {
 	public void onMousePressed(MouseEvent evt) {
     	prevX = evt.getX();
     	prevY = evt.getY();
+    	xProp.set(prevX);
+    	yProp.set(prevY);
+    	
     	trace = new Trace(1, "black", prevX, prevY);
     	dessin.addFigure(trace);
     }
     
     public void onMouseDragged(MouseEvent evt) {
     	canvas.getGraphicsContext2D().strokeLine(prevX, prevY, evt.getX(), evt.getY());
-    	Point point = new Point(prevX, prevY);
-    	trace.addPoint(point);
+    	trace.addPoint(new Point(prevX, prevY));
+    	
     	prevX = evt.getX();
     	prevY = evt.getY();
+    	xProp.set(prevX);
+    	yProp.set(prevY);
+    }
+    
+    public void onMouseMoved(MouseEvent evt) {
+    	prevX = evt.getX();
+    	prevY = evt.getY();
+    	xProp.set(prevX);
+    	yProp.set(prevY);
     }
 }

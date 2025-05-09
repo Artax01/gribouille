@@ -62,7 +62,7 @@
     <!-- CONTENT -->
     <center>
     	<Pane fx:id="pane">
-    		<Canvas fx:id="canvas" onMousePressed="#onMousePressed" onMouseDragged="#onMouseDragged"/>
+    		<Canvas fx:id="canvas" onMousePressed="#onMousePressed" onMouseDragged="#onMouseDragged" onMouseMoved="#onMouseMoved"/>
      	</Pane>
 	</center>
     <!-- RIGHT CONTENT -->

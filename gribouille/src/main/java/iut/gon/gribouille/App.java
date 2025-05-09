@@ -23,10 +23,11 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
     	Dessin dessin = new Dessin();
+    	dessin.setNomDuFichier("Gribouille");
     	controller = new Controller(dessin);
     	
         scene = new Scene(loadFXML("CadreGribouille"), 640, 480);
-        stage.setTitle("Gribouille");
+        stage.setTitle(dessin.getNomDuFichier());
         stage.setScene(scene);
         stage.show();
         
