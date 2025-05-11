@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.RadioMenuItem?>
+<?import javafx.scene.control.ToggleGroup?>
+
+<MenuBar xmlns="http://javafx.com/javafx/21.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iut.gon.gribouille.controleurs.MenusController">
+	<Menu text="Dessin">
+		<MenuItem text="Charger"/>
+		<MenuItem text="Sauvergarder"/>
+		<MenuItem text="Exporter"/>
+		<SeparatorMenuItem/>
+		<MenuItem text="Quitter" onAction="#onQuitte"/>
+	</Menu>
+	<Menu text="Outils">
+	<Menu text="Epaisseur">
+		<RadioMenuItem text="1" selected="true">
+			<toggleGroup>
+				<ToggleGroup fx:id="second"/>
+			</toggleGroup>
+		</RadioMenuItem>
+		<RadioMenuItem text="2" toggleGroup="$second"/>
+	 	<RadioMenuItem text="3" toggleGroup="$second"/>
+		<RadioMenuItem text="4" toggleGroup="$second"/>
+		<RadioMenuItem text="5" toggleGroup="$second"/>
+		<RadioMenuItem text="6" toggleGroup="$second"/>
+		<RadioMenuItem text="7" toggleGroup="$second"/>
+		<RadioMenuItem text="8" toggleGroup="$second"/>
+		<RadioMenuItem text="9" toggleGroup="$second"/>
+	</Menu>		
+	<RadioMenuItem text="Crayon" selected="true">
+		<toggleGroup>
+			<ToggleGroup fx:id="premier"/>
+		</toggleGroup>
+	</RadioMenuItem>
+	<RadioMenuItem text="Etoile" toggleGroup="$premier"/>
+ 	</Menu>
+ 	<Menu text="Aide">
+ 		<MenuItem text="A propos"/>
+ 	</Menu>
+ </MenuBar>

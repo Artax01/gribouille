@@ -1,115 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.TilePane?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SeparatorMenuItem?>
-<?import javafx.scene.control.RadioMenuItem?>
-<?import javafx.scene.control.ToggleGroup?>
-<?import javafx.scene.control.ColorPicker?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.canvas.Canvas?>
-<?import javafx.scene.shape.Rectangle?>
 
 <BorderPane xmlns="http://javafx.com/javafx/21.0.2" xmlns:fx="http://javafx.com/fxml/1">
 	<!-- TOP CONTENT -->
 	<top>
-		<MenuBar>
-			<Menu text="Dessin">
-				<MenuItem text="Charger"/>
-		 		<MenuItem text="Sauvergarder"/>
-		 		<MenuItem text="Exporter"/>
-		 		<SeparatorMenuItem/>
-		 		<MenuItem text="Quitter"/>
-		 	</Menu>
-		 	<Menu text="Outils">
-	 			<Menu text="Epaisseur">
-	 				<RadioMenuItem text="1" selected="true">
- 						<toggleGroup>
-	 						<ToggleGroup fx:id="second"/>
-	 					</toggleGroup>
- 					</RadioMenuItem>
- 					<RadioMenuItem text="2" toggleGroup="$second"/>
- 					<RadioMenuItem text="3" toggleGroup="$second"/>
- 					<RadioMenuItem text="4" toggleGroup="$second"/>
- 					<RadioMenuItem text="5" toggleGroup="$second"/>
- 					<RadioMenuItem text="6" toggleGroup="$second"/>
- 					<RadioMenuItem text="7" toggleGroup="$second"/>
- 					<RadioMenuItem text="8" toggleGroup="$second"/>
- 					<RadioMenuItem text="9" toggleGroup="$second"/>
-	 			</Menu>
-	 			
-	 			<RadioMenuItem text="Crayon" selected="true">
-	 				<toggleGroup>
-	 					<ToggleGroup fx:id="premier"/>
-	 				</toggleGroup>
-	 			</RadioMenuItem>
-	 			<RadioMenuItem text="Etoile" toggleGroup="$premier"/>
-		 	</Menu>
-		 	<Menu text="Aide">
-		 		<MenuItem text="A propos"/>
-		 	</Menu>
-		 </MenuBar>
+		<fx:include source="menus.fxml" fx:id="menus"/>
 	</top>
     <!-- CONTENT -->
     <center>
-    	<Pane fx:id="pane">
-    		<Canvas fx:id="canvas" onMousePressed="#onMousePressed" onMouseDragged="#onMouseDragged" onMouseMoved="#onMouseMoved"/>
-     	</Pane>
+    	<fx:include source="dessin.fxml" fx:id="dessin"/>
 	</center>
     <!-- RIGHT CONTENT -->
     <right>
-    	<VBox style="-fx-background-color: lightgrey" >
-    		<ColorPicker fx:id="colorPicker"/>
-     		<TilePane VBox.vgrow="always" prefColumns="2" alignment="top_center">
- 				<Rectangle fx:id="rect_red" fill="red" stroke="black" strokeWidth="3" height="65" width="65"/>
- 				<Rectangle fx:id="rect_lime" fill="lime" stroke="black" height="65" width="65"/>
-				<Rectangle fx:id="rect_blue" fill="blue" stroke="black" height="65" width="65"/>
- 				<Rectangle fx:id="rect_cyan" fill="cyan" stroke="black" height="65" width="65"/>
- 				<Rectangle fx:id="rect_pink" fill="pink" stroke="black" height="65" width="65"/>
- 				<Rectangle fx:id="rect_yellow" fill="yellow" stroke="black" height="65" width="65"/>
- 				<Rectangle fx:id="rect_black" fill="black" stroke="black" height="65" width="65"/>
- 				<Rectangle fx:id="rect_white" fill="white" stroke="black" height="65" width="65"/>
-     		</TilePane>
-     	</VBox>
-     </right>
-     <!-- BOTTOM CONTENT -->
-     <bottom>
-     	<GridPane style="-fx-background-color: d9d9d9;">
-	     	<columnConstraints>
-	        	<ColumnConstraints percentWidth="20" halignment="CENTER"/>
-	        	<ColumnConstraints percentWidth="20" halignment="CENTER"/>
-	        	<ColumnConstraints percentWidth="20" halignment="CENTER"/>
-	        	<ColumnConstraints percentWidth="20" halignment="CENTER"/>
-	        	<ColumnConstraints percentWidth="20" halignment="CENTER"/>
-	    	</columnConstraints>
-	    	<rowConstraints>
-	    		<RowConstraints minHeight="10.0" prefHeight="30.0"/>
-	    	</rowConstraints>
-			<children>
-	     		<HBox GridPane.columnIndex="0" alignment="CENTER">
-	     			<Label text="x:"/>
-	     			<Label fx:id="xCoordinate" text=""/>
-	     		</HBox>
-	     		<HBox GridPane.columnIndex="1" alignment="CENTER">
-	     			<Label text="y:"/>
-	     			<Label fx:id="yCoordinate" text=""/>
-	     		</HBox>
-	     		<HBox  GridPane.columnIndex="2" alignment="CENTER">
-	     			<Label text="Epaisseur:"/>
-	     			<Label fx:id="epaisseur" text=""/>
-	     		</HBox>
-	     		<Label text="Outil" GridPane.columnIndex="3" textAlignment="CENTER"/>
-	     		<Label text="Couleur" GridPane.columnIndex="4"/>
-	     	</children>
-     	</GridPane>
-     </bottom>
+    	<fx:include source="couleurs.fxml" fx:id="couleurs"/>
+    </right>
+    <!-- BOTTOM CONTENT -->
+    <bottom>
+     	<fx:include source="statut.fxml" fx:id="statut"/>
+    </bottom>
 </BorderPane>
