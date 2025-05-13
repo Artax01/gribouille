@@ -30,7 +30,10 @@
 	   		<Label text="Epaisseur: "/>
 	     	<Label fx:id="epaisseur" text=""/>
 	    </HBox>
-	    <Label text="Outil: " GridPane.columnIndex="3" textAlignment="CENTER"/>
+	    <HBox GridPane.columnIndex="3" alignment="CENTER">
+	    	<Label text="Outil: "/>
+	    	<Label fx:id="outil" text="Crayon"/>
+	    </HBox>
 	    <HBox GridPane.columnIndex="4" alignment="CENTER">
 	    	<Label text="Couleur: "/>
 	    	<Label fx:id="couleur" text=""/>

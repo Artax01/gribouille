@@ -31,12 +31,12 @@
 		<RadioMenuItem text="8" toggleGroup="$second"/>
 		<RadioMenuItem text="9" toggleGroup="$second"/>
 	</Menu>		
-	<RadioMenuItem text="Crayon" selected="true">
+	<RadioMenuItem text="Crayon" selected="true" fx:id="crayon">
 		<toggleGroup>
 			<ToggleGroup fx:id="premier"/>
 		</toggleGroup>
 	</RadioMenuItem>
-	<RadioMenuItem text="Etoile" toggleGroup="$premier"/>
+	<RadioMenuItem text="Etoile" toggleGroup="$premier" fx:id="etoile"/>
  	</Menu>
  	<Menu text="Aide">
  		<MenuItem text="A propos"/>

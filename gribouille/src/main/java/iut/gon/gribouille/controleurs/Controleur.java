@@ -11,12 +11,14 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import javafx.stage.WindowEvent;
 
 public class Controleur implements Initializable {
 	public final Dessin dessin = new Dessin();
 	public Figure figureCourante;
+	public Outil outilCourant = new OutilCrayon(this);
 	public final SimpleDoubleProperty precX = new SimpleDoubleProperty();
 	public final SimpleDoubleProperty precY = new SimpleDoubleProperty();
 	public final SimpleIntegerProperty epaisseur = new SimpleIntegerProperty(1);
@@ -61,6 +63,16 @@ public class Controleur implements Initializable {
 		precX.set(x);
 		precY.set(y);
 	}
+	
+	public void onCrayon() {
+		outilCourant = new OutilCrayon(this);
+		statutController.outil.setText("Crayon");
+	};
+	
+	public void onEtoile() {
+		outilCourant = new OutilEtoile(this);
+		statutController.outil.setText("Etoile");
+	};
 	
 	public void dessine() {
     	GraphicsContext gc = dessinController.canvas.getGraphicsContext2D();

@@ -11,6 +11,7 @@ public class StatutController implements Initializable {
 	@FXML public Label xCoordinate;
     @FXML public Label yCoordinate;
     @FXML public Label epaisseur;
+    @FXML public Label outil;
     @FXML public Label couleur;
     
     private Controleur controleur;
