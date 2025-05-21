@@ -12,11 +12,11 @@ public class DessinController implements Initializable {
 
 	@FXML public Pane pane;
 	@FXML public Canvas canvas;
-    
-	private Controleur controleur;
-    
-    public void setControleur(Controleur controleur) {
-    	this.controleur = controleur;
+	
+	private Controller controller;
+
+    public void setControleur(Controller c) {
+    	this.controller = c;
     }
 
 	@Override
@@ -25,31 +25,36 @@ public class DessinController implements Initializable {
 			pane.setPrefHeight(newValue.getHeight());
 			pane.setPrefWidth(newValue.getWidth());
 		});
-		
+
 		canvas.heightProperty().bind(pane.heightProperty());
 		canvas.widthProperty().bind(pane.widthProperty());
+		
+		canvas.heightProperty().addListener((observableValue, oldValue, newValue) -> controller.dessine());
+		canvas.widthProperty().addListener((observableValue, oldValue, newValue) -> controller.dessine());
 	}
-	
+
 	public void efface() {
 		canvas.getGraphicsContext2D().clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 	}
-	
+
 	public void trace(double x1, double y1, double x2, double y2) {
 		canvas.getGraphicsContext2D().strokeLine(x1, y1, x2, y2);
 	}
-	
+
 	@FXML
 	private void onMousePress(MouseEvent evt) {
-		controleur.onMousePress(evt.getX(), evt.getY());
+		controller.outilCourant.onMousePress(evt.getX(), evt.getY());
 	}
-	
+
 	@FXML
 	private void onMouseMove(MouseEvent evt) {
-		controleur.onMouseMove(evt.getX(), evt.getY());
+		controller.prevX.set(evt.getX());
+		controller.prevY.set(evt.getY());
 	}
-	
+
 	@FXML
 	private void onMouseDrag(MouseEvent evt) {
-		controleur.onMouseDrag(evt.getX(), evt.getY());
+		controller.outilCourant.onMouseDrag(evt.getX(), evt.getY());
 	}
+
 }

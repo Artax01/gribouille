@@ -13,15 +13,16 @@ public class StatutController implements Initializable {
     @FXML public Label epaisseur;
     @FXML public Label outil;
     @FXML public Label couleur;
-    
-    private Controleur controleur;
-    
-    public void setControleur(Controleur controleur) {
-    	this.controleur = controleur;
+
+    private Controller controller; 
+
+    public void setControleur(Controller c) {
+    	this.controller = c;
     }
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
+		// TODO
 	}
+
 }

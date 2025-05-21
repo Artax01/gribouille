@@ -5,13 +5,13 @@ import iut.gon.gribouille.modele.Figure;
 public abstract class Outil {
 	
 	protected Figure figureCourante;
-	protected Controleur controleur;
+	protected Controller controller;
 	
-	public Outil(Controleur c) {
-		controleur = c;
+	public Outil(Controller c) {
+		controller = c;
 	}
 	
-	public void onMousePress() {};
+	public void onMousePress(double x, double y) {};
 
-	public void onMouseDrag() {};
+	public void onMouseDrag(double x, double y) {};
 }

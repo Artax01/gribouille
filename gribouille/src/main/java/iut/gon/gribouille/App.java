@@ -6,7 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
-import iut.gon.gribouille.controleurs.Controleur;
+import iut.gon.gribouille.controleurs.Controller;
 
 /**
  * JavaFX App
@@ -14,11 +14,11 @@ import iut.gon.gribouille.controleurs.Controleur;
 public class App extends Application {
 
     private static Scene scene;
-    private static Controleur controleur;
+    private static Controller controleur;
 
     @Override
     public void start(Stage stage) throws IOException {
-    	controleur = new Controleur();
+    	controleur = new Controller();
     	controleur.dessin.setNomDuFichier("Gribouille");
     	
         scene = new Scene(loadFXML("CadreGribouille"), 800, 480);
