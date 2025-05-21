@@ -4,13 +4,9 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
-
 import java.io.IOException;
-
-import iut.gon.gribouille.modele.Dessin;
+import iut.gon.gribouille.controleurs.Controller;
 
 /**
  * JavaFX App
@@ -18,23 +14,20 @@ import iut.gon.gribouille.modele.Dessin;
 public class App extends Application {
 
     private static Scene scene;
-    private static Controller controller;
+    private static Controller controleur;
 
     @Override
     public void start(Stage stage) throws IOException {
-    	Dessin dessin = new Dessin();
-    	dessin.setNomDuFichier("Gribouille");
-    	controller = new Controller(dessin);
+    	controleur = new Controller();
+    	controleur.dessin.setNomDuFichier("Gribouille");
     	
-        scene = new Scene(loadFXML("CadreGribouille"), 640, 480);
-        stage.setTitle(dessin.getNomDuFichier());
+        scene = new Scene(loadFXML("CadreGribouille"), 800, 480);
+        stage.setTitle(controleur.dessin.getNomDuFichier());
         stage.setScene(scene);
         stage.show();
         
-        stage.addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, (event) -> {
-        	if (!Dialogues.confirmation()) {
-        		event.consume();
-        	}
+        stage.setOnCloseRequest((evt) -> {
+        	controleur.onCloseRequest(evt);
         });
     }
 
@@ -44,7 +37,7 @@ public class App extends Application {
 
     private static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
-        fxmlLoader.setController(controller);
+        fxmlLoader.setController(controleur);
         return fxmlLoader.load();
     }
 

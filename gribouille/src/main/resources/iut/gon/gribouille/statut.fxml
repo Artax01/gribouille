@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
+
+<GridPane style="-fx-background-color: d9d9d9;" xmlns="http://javafx.com/javafx/21.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iut.gon.gribouille.controleurs.StatutController">
+	<columnConstraints>
+		<ColumnConstraints percentWidth="20" halignment="CENTER"/>
+	    <ColumnConstraints percentWidth="20" halignment="CENTER"/>
+	    <ColumnConstraints percentWidth="20" halignment="CENTER"/>
+	    <ColumnConstraints percentWidth="20" halignment="CENTER"/>
+	    <ColumnConstraints percentWidth="20" halignment="CENTER"/>
+	</columnConstraints>
+	<rowConstraints>
+	   	<RowConstraints minHeight="10.0" prefHeight="30.0"/>
+	</rowConstraints>
+	<children>
+		<HBox GridPane.columnIndex="0" alignment="CENTER">
+	   		<Label text="x: "/>
+	   		<Label fx:id="xCoordinate" text=""/>
+	   	</HBox>
+	   	<HBox GridPane.columnIndex="1" alignment="CENTER">
+	   		<Label text="y: "/>
+	   		<Label fx:id="yCoordinate" text=""/>
+	   	</HBox>
+	   	<HBox GridPane.columnIndex="2" alignment="CENTER">
+	   		<Label text="Epaisseur: "/>
+	     	<Label fx:id="epaisseur" text=""/>
+	    </HBox>
+	    <HBox GridPane.columnIndex="3" alignment="CENTER">
+	    	<Label text="Outil: "/>
+	    	<Label fx:id="outil" text="Crayon"/>
+	    </HBox>
+	    <HBox GridPane.columnIndex="4" alignment="CENTER">
+	    	<Label text="Couleur: "/>
+	    	<Label fx:id="couleur" text=""/>
+	    </HBox>
+	</children>
+</GridPane>
