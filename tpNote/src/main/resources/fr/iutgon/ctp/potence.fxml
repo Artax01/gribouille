@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Ellipse?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.control.Label?>
+
+<AnchorPane prefHeight="200.0" prefWidth="Infinity" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+    <VBox AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+    	<MenuBar>
+    		<Menu text="Partie">
+    			<MenuItem text="Nouvelle" onAction="#onNewGame" fx:id="newGameBtn"/>
+    			<MenuItem text="Quitter" onAction="#onQuit" fx:id="quitBtn"/>
+    		</Menu>
+    		<Menu text="Aide">
+    			<MenuItem text="À propos" onAction="#onAbout" fx:id="aboutBtn"/>
+    			<MenuItem text="Scores" onAction="#onScores" fx:id="scoresBtn"/>
+    		</Menu>
+    	</MenuBar>
+    </VBox>
+    
+    <FlowPane fx:id="flowPane" alignment="CENTER" prefWidth="100.0" vgap="4" hgap="4" AnchorPane.topAnchor="25.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0"/>
+    
+    <Rectangle fx:id="corde" arcHeight="5.0" arcWidth="5.0" fill="#f5cc00" height="67.0" layoutX="344.0" layoutY="46.0" stroke="BLACK" strokeType="INSIDE" width="6.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="47.0"/>  
+    <Rectangle fx:id="soutien" arcHeight="5.0" arcWidth="5.0" fill="#8d572a" height="24.0" layoutX="396.0" layoutY="55.0" rotate="45.0" stroke="BLACK" strokeType="INSIDE" width="79.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="50.0"/>   
+    <Rectangle fx:id="mat" arcHeight="5.0" arcWidth="5.0" fill="#9e5a12" height="274.0" layoutX="454.0" layoutY="25.0" stroke="BLACK" strokeType="INSIDE" width="22.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="25.0"/>
+    <Rectangle fx:id="potence" arcHeight="5.0" arcWidth="5.0" fill="#9e5a12" height="24.0" layoutX="329.0" layoutY="25.0" stroke="BLACK" strokeType="INSIDE" width="147.0" AnchorPane.bottomAnchor="18.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="25.0"/>
+    <Circle fx:id="tete" fill="#20ff1f" layoutX="347.0" layoutY="97.0" radius="18.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.rightAnchor="135.0" AnchorPane.topAnchor="79.0"/>      
+    <Rectangle fx:id="bras_droit" arcHeight="5.0" arcWidth="5.0" fill="#fce0df" height="18.0" layoutX="280.0" layoutY="136.0" rotate="-30.0" stroke="BLACK" strokeType="INSIDE" width="60.0" AnchorPane.rightAnchor="160.0" AnchorPane.topAnchor="136.0"/>          
+    <Rectangle fx:id="bras_gauche" arcHeight="5.0" arcWidth="5.0" fill="#fce0df" height="18.0" layoutX="353.0" layoutY="136.0" rotate="30.0" stroke="BLACK" strokeType="INSIDE" width="60.0" AnchorPane.rightAnchor="87.0" AnchorPane.topAnchor="136.0"/>        
+    <Rectangle fx:id="jambe_gauche" arcHeight="5.0" arcWidth="5.0" fill="#fce0df" height="24.0" layoutX="337.0" layoutY="207.0" rotate="60.0" stroke="BLACK" strokeType="INSIDE" width="79.0" AnchorPane.rightAnchor="85.0" AnchorPane.topAnchor="210.0"/>
+    <Rectangle fx:id="jambe_droite" arcHeight="5.0" arcWidth="5.0" fill="#fce0df" height="24.0" layoutX="280.0" layoutY="207.0" rotate="-60.0" stroke="BLACK" strokeType="INSIDE" width="79.0" AnchorPane.rightAnchor="140.0" AnchorPane.topAnchor="210.0"/>    
+    <Ellipse fx:id="corps" fill="DODGERBLUE" layoutX="347.0" layoutY="162.0" radiusX="32.0" radiusY="47.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.rightAnchor="121.0" AnchorPane.topAnchor="115.0"/>
+             
+    <HBox fx:id="hbox" alignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"/>
+    
+    
+</AnchorPane>
