@@ -17,7 +17,7 @@
 		<VBox alignment="CENTER">
 			<MenuBar>
 				<Menu text="Jeu">
-					<MenuItem text="Quitter"/>
+					<MenuItem text="Quitter" onAction="#onQuitter"/>
 				</Menu>
 				<Menu text="Difficulté">
 					<RadioMenuItem text="Facile" userData="10;10;10">
