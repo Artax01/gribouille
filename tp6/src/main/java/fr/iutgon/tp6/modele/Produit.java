@@ -54,7 +54,7 @@ public class Produit {
 
   @Override
   public String toString() {
-    //return String.format("Produit{nom='%s', prix=%s, tva=%s}", nom, prix, tva);
+	  //return String.format("Produit{nom='%s', prix=%s, tva=%s}", nom, prix, tva);
 	  return nom;
   }
 
