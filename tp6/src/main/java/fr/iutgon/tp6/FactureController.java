@@ -5,6 +5,8 @@ import fr.iutgon.tp6.modele.FabriqueProduits;
 import fr.iutgon.tp6.modele.Ligne;
 import fr.iutgon.tp6.modele.Produit;
 import javafx.beans.binding.Bindings;
+import javafx.beans.binding.NumberExpression;
+import javafx.beans.property.SimpleFloatProperty;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
@@ -28,6 +30,7 @@ public class FactureController implements Initializable {
   public TableColumn<Ligne, Number> prixUnitaire;
   public TableColumn<Ligne, Number> totalHT;
   public TableColumn<Ligne, Number> totalTTC;
+  public NumberExpression total = new SimpleFloatProperty(0.0f);
   public TextField sommeFacture;
 
   /**
@@ -79,6 +82,8 @@ public class FactureController implements Initializable {
 	  Random r = new Random();
 	  Ligne ligne = new Ligne(r.nextInt(4) + 1, FabriqueProduits.getProduits().get(r.nextInt(FabriqueProduits.getProduits().size() - 1)));
 	  // on exclu le "produit" promotion et on ne peut pas avoir une quantite nulle
+	  total = Bindings.add(total, ligne.totalTTCProperty());
+	  sommeFacture.textProperty().bind(total.asString());
 	  table.getItems().add(ligne);
   }
 }
