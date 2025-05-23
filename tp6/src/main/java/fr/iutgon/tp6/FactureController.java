@@ -42,9 +42,11 @@ public class FactureController implements Initializable {
    */
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+	  /** qte */
 	  qte.setCellValueFactory(new PropertyValueFactory<>("qte"));
 	  qte.setCellFactory(cell -> new TextFieldTableCell<>(new IntegerStringConverter()));
 	  
+	  /** produit */
 	  produit.setCellValueFactory(param -> {
 		  return param.getValue().produitProperty(); // bindings.select dans le futur au lieu de la ligne au dessus
 	  });
@@ -65,23 +67,29 @@ public class FactureController implements Initializable {
 	  		}, FXCollections.observableArrayList(FabriqueProduits.getProduits())
 	  ));
 	
+	  /** prixUnitaire */
 	  prixUnitaire.setCellValueFactory(param -> {
 		  return Bindings.select(param.getValue().produitProperty(), "prix");
 	  });
+	  prixUnitaire.setCellFactory(cell -> new FormattedFloatCell<>());
 	
+	  /** totalHT */
 	  totalHT.setCellValueFactory(param -> { 
 		  return param.getValue().totalHTProperty();
 	  });
+	  totalHT.setCellFactory(cell -> new FormattedFloatCell<>());
 	
+	  /** totalTTC */
 	  totalTTC.setCellValueFactory(param -> {
 		  return param.getValue().totalTTCProperty();
 	  });
+	  totalTTC.setCellFactory(cell -> new FormattedFloatCell<>());
   }
 
   public void onAjouter(ActionEvent actionEvent) {
 	  Random r = new Random();
-	  Ligne ligne = new Ligne(r.nextInt(4) + 1, FabriqueProduits.getProduits().get(r.nextInt(FabriqueProduits.getProduits().size() - 1)));
-	  // on exclu le "produit" promotion et on ne peut pas avoir une quantite nulle
+	  Ligne ligne = new Ligne(r.nextInt(10) + 1, FabriqueProduits.getProduits().get(r.nextInt(FabriqueProduits.getProduits().size())));
+	  // on ne peut pas avoir une quantite nulle grace au + 1
 	  total = Bindings.add(total, ligne.totalTTCProperty());
 	  sommeFacture.textProperty().bind(total.asString());
 	  table.getItems().add(ligne);
