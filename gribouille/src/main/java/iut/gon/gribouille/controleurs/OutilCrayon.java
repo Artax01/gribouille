@@ -9,7 +9,7 @@ public class OutilCrayon extends Outil {
 	}
 	
 	public void onMousePress(double x, double y) {
-		controller.figureCourante = new Trace(1, "black", x, y);
+		controller.figureCourante = new Trace(controller.epaisseur.get(), "black", x, y);
 		controller.dessin.addFigure(controller.figureCourante);
 		controller.prevX.set(x);
     	controller.prevY.set(y);

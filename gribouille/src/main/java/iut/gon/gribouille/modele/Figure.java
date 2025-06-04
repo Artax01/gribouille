@@ -62,7 +62,7 @@ public abstract class Figure {
   public abstract Figure changeCouleur(String nouvelleCouleur);
 
   /**
-   Crée une nouvelle figure qui continue la figure courante avec une nouvelle couleur
+   Crée une nouvelle figure qui continue la figure courante avec une nouvelle epaisseur
    */
   public abstract Figure changeEpaisseur(int nouvelleEpaisseur);
 } // public class Figure

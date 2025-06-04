@@ -55,6 +55,7 @@ public class Controller implements Initializable {
     	GraphicsContext gc = dessinController.canvas.getGraphicsContext2D();
     	gc.clearRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
     	for (Figure f : dessin.getFigures()) {
+    		gc.setLineWidth(f.getEpaisseur());
     		for (int i = 1; i < f.getPoints().size(); i++) {
     			if (f instanceof Trace) {
     				double x0 = f.getPoints().get(i-1).getX();
