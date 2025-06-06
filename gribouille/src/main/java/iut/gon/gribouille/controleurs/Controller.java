@@ -179,7 +179,11 @@ public class Controller implements Initializable {
 		selecteur.getExtensionFilters().add(new FileChooser.ExtensionFilter("Fichiers gribouille", "*.grb"));
 		File fichier = selecteur.showSaveDialog(Window.getWindows().get(0));
 		if (fichier != null) {
-			System.out.println(fichier.getAbsolutePath());
+			String nomFichier = fichier.getName();
+	        if (!nomFichier.endsWith(".grb")) {
+	            fichier = new File(fichier.getParent(), nomFichier + ".grb");
+	        }
+			
 			dessin.sauveSous(fichier.getAbsolutePath());
 			dessin.setNomDuFichier(fichier.getName());
 		}
