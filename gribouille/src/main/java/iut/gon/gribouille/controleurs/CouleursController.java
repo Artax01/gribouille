@@ -34,6 +34,8 @@ public class CouleursController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		colorPicker.setValue(Color.BLACK);
+		
 		vbox.setOnMouseClicked(event -> {
 			if (event.getTarget() instanceof Rectangle) {
 				Rectangle selectRect = (Rectangle) event.getTarget();
@@ -50,6 +52,10 @@ public class CouleursController implements Initializable {
 				dernierRect = selectRect;
 				controller.setCouleur((Color) selectRect.getFill());
 			}
+		});
+		
+		colorPicker.setOnAction(event -> {
+			controller.setCouleur(colorPicker.getValue());
 		});
 			
 	}

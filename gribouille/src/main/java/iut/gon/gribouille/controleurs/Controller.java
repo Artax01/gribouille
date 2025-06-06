@@ -2,7 +2,9 @@ package iut.gon.gribouille.controleurs;
 
 import java.io.File;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
+import javax.imageio.ImageIO;
 import iut.gon.gribouille.Dialogues;
 import iut.gon.gribouille.modele.*;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -10,11 +12,16 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
 import javafx.stage.WindowEvent;
+import javafx.embed.swing.SwingFXUtils;
 
 public class Controller implements Initializable {
 
@@ -186,6 +193,41 @@ public class Controller implements Initializable {
 			
 			dessin.sauveSous(fichier.getAbsolutePath());
 			dessin.setNomDuFichier(fichier.getName());
+		}
+	}
+	
+	public void onExporte() {
+		FileChooser selecteur = new FileChooser();
+		selecteur.setTitle("Exporter le dessin");
+		selecteur.getExtensionFilters().add(new FileChooser.ExtensionFilter("Format PNG", "*.png"));
+        File fichier = selecteur.showSaveDialog(Window.getWindows().get(0));
+        if (fichier != null) {
+        	
+        	String nomFichier = fichier.getName();
+	        if (!nomFichier.endsWith(".png")) {
+	            fichier = new File(fichier.getParent(), nomFichier + ".png");
+	        }
+        	
+            WritableImage image = dessinController.canvas.snapshot(new SnapshotParameters(), null);
+            
+            try {
+                ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", fichier);
+            } catch (Exception e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Problème lors de l'exportation", ButtonType.YES);
+                alert.setTitle("Problème lors de l'exportation");
+                alert.showAndWait();
+            }
+        }
+	}
+	
+	public void onEffacerTout() {
+		Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.YES, ButtonType.NO);
+		alert.setHeaderText("Cette action est irreversible !");
+		alert.setContentText("Voulez-vous vraiment effacer tout le dessin ?");
+		Optional<ButtonType> result = alert.showAndWait();
+		if (result.get() == ButtonType.YES) {
+	        dessin.getFigures().clear();
+			dessinController.efface();
 		}
 	}
 

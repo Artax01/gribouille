@@ -2,10 +2,13 @@ package iut.gon.gribouille.controleurs;
 
 import java.io.File;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.FileChooser;
@@ -54,6 +57,21 @@ public class MenusController implements Initializable {
     
     public void onSauvegarde() {
     	controller.onSauvegarde();
+    }
+    
+    public void onExporte() {
+    	controller.onExporte();
+    }
+    
+    public void onEffacerTout() {
+    	controller.onEffacerTout();
+    }
+    
+    public void onAPropos() {
+    	Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.YES);
+		alert.setHeaderText("Logiciel Gribouille: Réalisé par XXX");
+		alert.setContentText("Le projet Gribouille est un logiciel de dessin écrit en Java/JavaFX.");
+		alert.showAndWait();
     }
 
     @FXML
