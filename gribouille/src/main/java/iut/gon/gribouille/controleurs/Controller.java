@@ -232,6 +232,34 @@ public class Controller implements Initializable {
 	}
 
 	public boolean onQuitter() {
+		if (dessin.estModifieProperty().get()) {
+			Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.CLOSE, ButtonType.YES, ButtonType.CANCEL);
+			alert.setTitle("Fichier non enregistré");
+			alert.setHeaderText("Votre dessin n'a pas encore était sauvergardé, que voulez-vous faire ?");
+			alert.setContentText("YES = sauvergader; CLOSE = fermer sans sauvergarder; CANCEL = annuler");
+			Optional<ButtonType> result = alert.showAndWait();
+			
+			if (result.get() == ButtonType.YES) {
+				try {
+					onSauvegarde();
+					return false;
+				}
+				catch (Exception e) {
+					System.out.println(e.getMessage());
+					return true;
+				}
+			}
+			else if (result.get() == ButtonType.CANCEL) {
+				return false;
+			}
+			else if (result.get() == ButtonType.CLOSE) {
+				if (Dialogues.confirmation()) {
+					return true;
+				}
+				return false;
+			}
+		}
+		
 		if (Dialogues.confirmation()) {
 			return true;
 		}

@@ -23,10 +23,7 @@ public class App extends Application {
     	controller = new Controller();
         scene = new Scene(loadFXML("CadreGribouille"), 800, 480);
         
-        stage.titleProperty().bind(Bindings.concat(
-        		"Gribouille (", controller.dessin.nomDuFichierProperty(), ")",
-        		Bindings.when(controller.dessin.estModifieProperty()).then("*").otherwise("")
-        ));
+        stage.titleProperty().bind(Bindings.concat("Gribouille (", controller.dessin.nomDuFichierProperty(), ")", Bindings.when(controller.dessin.estModifieProperty()).then("*").otherwise("")));
         stage.setScene(scene);
         
         stage.getScene().setOnKeyPressed(evt -> {
