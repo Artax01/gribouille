@@ -1,7 +1,10 @@
 package iut.gon.gribouille.controleurs;
 
+import java.io.File;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
+import javax.imageio.ImageIO;
 import iut.gon.gribouille.Dialogues;
 import iut.gon.gribouille.modele.*;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -9,9 +12,16 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
+import javafx.stage.Window;
 import javafx.stage.WindowEvent;
+import javafx.embed.swing.SwingFXUtils;
 
 public class Controller implements Initializable {
 
@@ -156,8 +166,100 @@ public class Controller implements Initializable {
 				break;
 		}
 	}
+	
+	public void onCharge() {
+		FileChooser selecteur = new FileChooser();
+		selecteur.setTitle("Charger un dessin");
+		selecteur.getExtensionFilters().add(new FileChooser.ExtensionFilter("Fichiers gribouille", "*.grb"));
+		File fichier = selecteur.showOpenDialog(Window.getWindows().get(0));
+		if (fichier != null) {
+			dessin.charge(fichier.getAbsolutePath());
+			dessin.setNomDuFichier(fichier.getName());
+			dessinController.efface();
+			dessine();
+		}
+	}
+	
+	public void onSauvegarde() {
+		FileChooser selecteur = new FileChooser();
+		selecteur.setTitle("Enregistrer sous le dessin");
+		selecteur.getExtensionFilters().add(new FileChooser.ExtensionFilter("Fichiers gribouille", "*.grb"));
+		File fichier = selecteur.showSaveDialog(Window.getWindows().get(0));
+		if (fichier != null) {
+			String nomFichier = fichier.getName();
+	        if (!nomFichier.endsWith(".grb")) {
+	            fichier = new File(fichier.getParent(), nomFichier + ".grb");
+	        }
+			
+			dessin.sauveSous(fichier.getAbsolutePath());
+			dessin.setNomDuFichier(fichier.getName());
+		}
+	}
+	
+	public void onExporte() {
+		FileChooser selecteur = new FileChooser();
+		selecteur.setTitle("Exporter le dessin");
+		selecteur.getExtensionFilters().add(new FileChooser.ExtensionFilter("Format PNG", "*.png"));
+        File fichier = selecteur.showSaveDialog(Window.getWindows().get(0));
+        if (fichier != null) {
+        	
+        	String nomFichier = fichier.getName();
+	        if (!nomFichier.endsWith(".png")) {
+	            fichier = new File(fichier.getParent(), nomFichier + ".png");
+	        }
+        	
+            WritableImage image = dessinController.canvas.snapshot(new SnapshotParameters(), null);
+            
+            try {
+                ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", fichier);
+            } catch (Exception e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Problème lors de l'exportation", ButtonType.YES);
+                alert.setTitle("Problème lors de l'exportation");
+                alert.showAndWait();
+            }
+        }
+	}
+	
+	public void onEffacerTout() {
+		Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.YES, ButtonType.NO);
+		alert.setHeaderText("Cette action est irreversible !");
+		alert.setContentText("Voulez-vous vraiment effacer tout le dessin ?");
+		Optional<ButtonType> result = alert.showAndWait();
+		if (result.get() == ButtonType.YES) {
+	        dessin.getFigures().clear();
+			dessinController.efface();
+		}
+	}
 
 	public boolean onQuitter() {
+		if (dessin.estModifieProperty().get()) {
+			Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.CLOSE, ButtonType.YES, ButtonType.CANCEL);
+			alert.setTitle("Fichier non enregistré");
+			alert.setHeaderText("Votre dessin n'a pas encore était sauvergardé, que voulez-vous faire ?");
+			alert.setContentText("YES = sauvergader; CLOSE = fermer sans sauvergarder; CANCEL = annuler");
+			Optional<ButtonType> result = alert.showAndWait();
+			
+			if (result.get() == ButtonType.YES) {
+				try {
+					onSauvegarde();
+					return false;
+				}
+				catch (Exception e) {
+					System.out.println(e.getMessage());
+					return true;
+				}
+			}
+			else if (result.get() == ButtonType.CANCEL) {
+				return false;
+			}
+			else if (result.get() == ButtonType.CLOSE) {
+				if (Dialogues.confirmation()) {
+					return true;
+				}
+				return false;
+			}
+		}
+		
 		if (Dialogues.confirmation()) {
 			return true;
 		}

@@ -1,5 +1,8 @@
 package iut.gon.gribouille.modele;
 
+import java.io.PrintWriter;
+import java.util.Scanner;
+
 /**
  Stocke une Figure "Etoile"
  */
@@ -16,6 +19,16 @@ public class Etoile extends Figure {
     super(epaisseur, couleur);
     centre = new Point(xc, yc);
   }
+  
+  /** Crée une étoile à partir d'une ligne de texte.
+   * @param scan le Scanner lisant la sérialisation de la figure
+   */
+  Etoile(Scanner scan) {
+    super(scan);
+    double x = scan.nextDouble();
+    double y = scan.nextDouble();
+    centre = new Point(x, y);
+  }
 
   /**
    Retourne le point central de l'étoile
@@ -30,6 +43,13 @@ public class Etoile extends Figure {
 
   public Figure changeEpaisseur(int nouvelleEpaisseur) {
     return new Etoile(nouvelleEpaisseur, couleur, centre.getX(), centre.getY());
+  }
+
+  @Override
+  public void sauve(PrintWriter out) {
+    out.print("E ");
+    super.sauve(out);
+    out.printf("%.1f %.1f\n",centre.getX(), centre.getY());
   }
 
 }
