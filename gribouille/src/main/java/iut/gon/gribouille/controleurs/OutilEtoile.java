@@ -12,7 +12,7 @@ public class OutilEtoile extends Outil {
 	}
 
 	public void onMousePress(double x, double y) {
-        controller.figureCourante = new Etoile(controller.epaisseur.get(), "black", x, y);
+        controller.figureCourante = new Etoile(controller.epaisseur.get(), controller.couleur.get().toString(), x, y);
         controller.dessin.addFigure(controller.figureCourante);
         x1 = x;
         y1 = y;

@@ -56,6 +56,7 @@ public class Controller implements Initializable {
     	gc.clearRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
     	for (Figure f : dessin.getFigures()) {
     		gc.setLineWidth(f.getEpaisseur());
+    		gc.setStroke(Color.valueOf(f.getCouleur()));
     		for (int i = 1; i < f.getPoints().size(); i++) {
     			if (f instanceof Trace) {
     				double x0 = f.getPoints().get(i-1).getX();
@@ -74,6 +75,14 @@ public class Controller implements Initializable {
     		}
     	}
     }
+	
+	public void setEpaisseur(int epaisseur) {
+		this.epaisseur.set(epaisseur);
+	}
+	
+	public void setCouleur(Color couleur) {
+		this.couleur.set(couleur);
+	}
 
 	public boolean onQuitter() {
 		if (Dialogues.confirmation()) {

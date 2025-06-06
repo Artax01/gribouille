@@ -7,6 +7,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Paint;
+import javafx.scene.paint.Color;
 
 public class DessinController implements Initializable {
 
@@ -42,8 +44,13 @@ public class DessinController implements Initializable {
 	}
 	
 	public void setEpaisseur(int epaisseur) {
-		controller.epaisseur.set(epaisseur);
+		controller.setEpaisseur(epaisseur);
 		canvas.getGraphicsContext2D().setLineWidth(epaisseur);
+	}
+	
+	public void setCouleur(Color couleur) {
+		controller.setCouleur(couleur);
+		canvas.getGraphicsContext2D().setStroke(couleur);
 	}
 
 	@FXML
