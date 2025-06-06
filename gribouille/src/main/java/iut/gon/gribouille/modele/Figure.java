@@ -1,7 +1,9 @@
 package iut.gon.gribouille.modele;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  Stocke une figure
@@ -17,6 +19,22 @@ public abstract class Figure {
   public Figure(int epaisseur, String couleur) {
     this.epaisseur = epaisseur;
     this.couleur = couleur;
+  }
+  
+  /** Crée une figure à partir d'une figure sérialisée.
+   * @param scan un Scanner lisant la ligne décrivant la figure
+   */
+  Figure(Scanner scan) {
+    epaisseur = scan.nextInt();
+    couleur = scan.next();
+    points = new ArrayList<>();
+    int nb = scan.nextInt();
+    while (nb > 0) {
+      double x = scan.nextDouble();
+      double y = scan.nextDouble();
+      points.add(new Point(x, y));
+      --nb;
+    }
   }
 
   /**
@@ -65,4 +83,24 @@ public abstract class Figure {
    Crée une nouvelle figure qui continue la figure courante avec une nouvelle epaisseur
    */
   public abstract Figure changeEpaisseur(int nouvelleEpaisseur);
+
+  /** Crée une figure à partir d'une figure sérialisée.
+   * @param line la ligne décrivant la figure
+   */
+  public static Figure charge(String line) {
+    Scanner scan = new Scanner(line);
+    switch (scan.next()) {
+      case "T" : return new Trace(scan);
+      case "E" : return new Etoile(scan);
+      default: throw new IllegalArgumentException("Type de figure inconnu");
+    }
+  }
+
+  /** Sauvegarde la figure sous forme d'une ligne de texte.
+   * @param out le PrintWriter où la ligne doit être ajoutée
+   */
+  public void sauve(PrintWriter out) {
+    out.printf("%d %s %d ",epaisseur, couleur, points.size());
+    points.forEach(p->out.printf("%.1f %.1f ",p.getX(), p.getY()));
+  }
 } // public class Figure

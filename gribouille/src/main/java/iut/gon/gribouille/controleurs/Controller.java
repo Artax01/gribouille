@@ -1,5 +1,6 @@
 package iut.gon.gribouille.controleurs;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 import iut.gon.gribouille.Dialogues;
@@ -11,6 +12,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
+import javafx.stage.Window;
 import javafx.stage.WindowEvent;
 
 public class Controller implements Initializable {
@@ -154,6 +157,31 @@ public class Controller implements Initializable {
 				break;
 			default:
 				break;
+		}
+	}
+	
+	public void onCharge() {
+		FileChooser selecteur = new FileChooser();
+		selecteur.setTitle("Charger un dessin");
+		selecteur.getExtensionFilters().add(new FileChooser.ExtensionFilter("Fichiers gribouille", "*.grb"));
+		File fichier = selecteur.showOpenDialog(Window.getWindows().get(0));
+		if (fichier != null) {
+			dessin.charge(fichier.getAbsolutePath());
+			dessin.setNomDuFichier(fichier.getName());
+			dessinController.efface();
+			dessine();
+		}
+	}
+	
+	public void onSauvegarde() {
+		FileChooser selecteur = new FileChooser();
+		selecteur.setTitle("Enregistrer sous le dessin");
+		selecteur.getExtensionFilters().add(new FileChooser.ExtensionFilter("Fichiers gribouille", "*.grb"));
+		File fichier = selecteur.showSaveDialog(Window.getWindows().get(0));
+		if (fichier != null) {
+			System.out.println(fichier.getAbsolutePath());
+			dessin.sauveSous(fichier.getAbsolutePath());
+			dessin.setNomDuFichier(fichier.getName());
 		}
 	}
 

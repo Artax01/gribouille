@@ -1,6 +1,8 @@
 package iut.gon.gribouille;
 
 import javafx.application.Application;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -14,23 +16,25 @@ import iut.gon.gribouille.controleurs.Controller;
 public class App extends Application {
 
     private static Scene scene;
-    private static Controller controleur;
+    private static Controller controller;
 
     @Override
     public void start(Stage stage) throws IOException {
-    	controleur = new Controller();
-    	controleur.dessin.setNomDuFichier("Gribouille");
-    	
+    	controller = new Controller();
         scene = new Scene(loadFXML("CadreGribouille"), 800, 480);
-        stage.setTitle(controleur.dessin.getNomDuFichier());
+        
+        stage.titleProperty().bind(Bindings.concat(
+        		"Gribouille (", controller.dessin.nomDuFichierProperty(), ")",
+        		Bindings.when(controller.dessin.estModifieProperty()).then("*").otherwise("")
+        ));
         stage.setScene(scene);
         
         stage.getScene().setOnKeyPressed(evt -> {
-        	controleur.onKeyPressed(evt.getText());
+        	controller.onKeyPressed(evt.getText());
         });
         
         stage.setOnCloseRequest((evt) -> {
-        	controleur.onCloseRequest(evt);
+        	controller.onCloseRequest(evt);
         });
         
         stage.show();
@@ -42,7 +46,7 @@ public class App extends Application {
 
     private static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
-        fxmlLoader.setController(controleur);
+        fxmlLoader.setController(controller);
         return fxmlLoader.load();
     }
 

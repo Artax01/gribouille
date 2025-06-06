@@ -9,8 +9,8 @@
 
 <MenuBar xmlns="http://javafx.com/javafx/21.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iut.gon.gribouille.controleurs.MenusController">
 	<Menu text="Dessin">
-		<MenuItem text="Charger"/>
-		<MenuItem text="Sauvergarder"/>
+		<MenuItem text="Charger" onAction="#onCharge"/>
+		<MenuItem text="Sauvergarder" onAction="#onSauvegarde"/>
 		<MenuItem text="Exporter"/>
 		<SeparatorMenuItem/>
 		<MenuItem text="Quitter" onAction="#onQuitte"/>

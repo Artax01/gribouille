@@ -1,5 +1,6 @@
 package iut.gon.gribouille.controleurs;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
@@ -7,6 +8,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.ToggleGroup;
+import javafx.stage.FileChooser;
+import javafx.stage.Window;
 
 public class MenusController implements Initializable {
 
@@ -41,7 +44,17 @@ public class MenusController implements Initializable {
     			controller.setEpaisseur(Integer.parseInt(((RadioMenuItem) newValue).getText()));
     		}
     	});
+    	
+    	
 	}
+    
+    public void onCharge() {
+    	controller.onCharge();
+    }
+    
+    public void onSauvegarde() {
+    	controller.onSauvegarde();
+    }
 
     @FXML
     private void onQuitte() {
