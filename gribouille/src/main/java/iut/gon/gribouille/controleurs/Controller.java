@@ -55,6 +55,8 @@ public class Controller implements Initializable {
     	GraphicsContext gc = dessinController.canvas.getGraphicsContext2D();
     	gc.clearRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
     	for (Figure f : dessin.getFigures()) {
+    		gc.setLineWidth(f.getEpaisseur());
+    		gc.setStroke(Color.valueOf(f.getCouleur()));
     		for (int i = 1; i < f.getPoints().size(); i++) {
     			if (f instanceof Trace) {
     				double x0 = f.getPoints().get(i-1).getX();
@@ -73,6 +75,87 @@ public class Controller implements Initializable {
     		}
     	}
     }
+	
+	public void setEpaisseur(int epaisseur) {
+		this.epaisseur.set(epaisseur);
+		dessinController.setEpaisseur(epaisseur);
+	}
+	
+	public void setCouleur(Color couleur) {
+		this.couleur.set(couleur);
+		dessinController.setCouleur(couleur);
+	}
+	
+	public void updateEpaisseur() {
+		figureCourante = figureCourante.changeEpaisseur(epaisseur.get());
+		dessin.addFigure(figureCourante);
+	}
+	
+	public void updateCouleur() {
+		figureCourante = figureCourante.changeCouleur(couleur.get().toString());
+		dessin.addFigure(figureCourante);
+	}
+	
+	public void updateForme() {
+		if (outilCourant != null) {
+			outilCourant.makeForme(prevX.get(), prevY.get());
+		}
+	}
+	
+	public void onKeyPressed(String key) {
+		switch(key.toLowerCase()) {
+			case ")":
+				if (epaisseur.get() > 1) this.setEpaisseur(epaisseur.get() - 1);
+				updateEpaisseur();
+				break;
+			case "=":
+				if (epaisseur.get() + 1 <= 9) this.setEpaisseur(epaisseur.get() + 1);
+				updateEpaisseur();
+				break;
+			case "c":
+				onCrayon();
+				updateForme();
+				break;
+			case "e":
+				onEtoile();
+				updateForme();
+				break;
+			case "&":
+				setCouleur(Color.RED);
+				updateCouleur();
+				break;
+			case "é":
+				setCouleur(Color.LIME);
+				updateCouleur();
+				break;
+			case "\"":
+				setCouleur(Color.BLUE);
+				updateCouleur();
+				break;
+			case "'":
+				setCouleur(Color.CYAN);
+				updateCouleur();
+				break;
+			case "(":
+				setCouleur(Color.PINK);
+				updateCouleur();
+				break;
+			case "-":
+				setCouleur(Color.YELLOW);
+				updateCouleur();
+				break;
+			case "è":
+				setCouleur(Color.BLACK);
+				updateCouleur();
+				break;
+			case "_":
+				setCouleur(Color.WHITE);
+				updateCouleur();
+				break;
+			default:
+				break;
+		}
+	}
 
 	public boolean onQuitter() {
 		if (Dialogues.confirmation()) {

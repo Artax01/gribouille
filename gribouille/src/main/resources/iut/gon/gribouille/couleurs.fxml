@@ -5,16 +5,16 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 
-<VBox style="-fx-background-color: lightgrey" xmlns="http://javafx.com/javafx/21.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iut.gon.gribouille.controleurs.CouleursController">
+<VBox fx:id="vbox" style="-fx-background-color: lightgrey" alignment="CENTER" xmlns="http://javafx.com/javafx/21.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iut.gon.gribouille.controleurs.CouleursController">
 	<ColorPicker fx:id="colorPicker"/>
-	<TilePane VBox.vgrow="always" prefColumns="2" alignment="top_center">
-		<Rectangle fx:id="rect_red" fill="red" stroke="black" strokeWidth="3" height="65" width="65"/>
-		<Rectangle fx:id="rect_lime" fill="lime" stroke="black" height="65" width="65"/>
-		<Rectangle fx:id="rect_blue" fill="blue" stroke="black" height="65" width="65"/>
-		<Rectangle fx:id="rect_cyan" fill="cyan" stroke="black" height="65" width="65"/>
-		<Rectangle fx:id="rect_pink" fill="pink" stroke="black" height="65" width="65"/>
-		<Rectangle fx:id="rect_yellow" fill="yellow" stroke="black" height="65" width="65"/>
-		<Rectangle fx:id="rect_black" fill="black" stroke="black" height="65" width="65"/>
-		<Rectangle fx:id="rect_white" fill="white" stroke="black" height="65" width="65"/>
+	<TilePane VBox.vgrow="always" prefColumns="2" alignment="TOP_CENTER">
+		<Rectangle fx:id="rect_red" fill="red" stroke="black" arcHeight="5" arcWidth="5" height="65" width="65"/>
+		<Rectangle fx:id="rect_lime" fill="lime" stroke="black" arcHeight="5" arcWidth="5" height="65" width="65"/>
+		<Rectangle fx:id="rect_blue" fill="blue" stroke="black" arcHeight="5" arcWidth="5" height="65" width="65"/>
+		<Rectangle fx:id="rect_cyan" fill="cyan" stroke="black" arcHeight="5" arcWidth="5" height="65" width="65"/>
+		<Rectangle fx:id="rect_pink" fill="pink" stroke="black" arcHeight="5" arcWidth="5" height="65" width="65"/>
+		<Rectangle fx:id="rect_yellow" fill="yellow" stroke="black" arcHeight="5" arcWidth="5" height="65" width="65"/>
+		<Rectangle fx:id="rect_black" fill="black" stroke="black" arcHeight="5" arcWidth="5" height="65" width="65"/>
+		<Rectangle fx:id="rect_white" fill="white" stroke="black" arcHeight="5" arcWidth="5" height="65" width="65"/>
 	</TilePane>
 </VBox>

@@ -8,11 +8,15 @@ public class OutilCrayon extends Outil {
 		super(c);
 	}
 	
-	public void onMousePress(double x, double y) {
-		controller.figureCourante = new Trace(1, "black", x, y);
+	public void makeForme(double x, double y) {
+		controller.figureCourante = new Trace(controller.epaisseur.get(), controller.couleur.get().toString(), x, y);
 		controller.dessin.addFigure(controller.figureCourante);
 		controller.prevX.set(x);
     	controller.prevY.set(y);
+	}
+	
+	public void onMousePress(double x, double y) {
+		makeForme(x, y);
 	}
 	
 	public void onMouseDrag(double x, double y) {

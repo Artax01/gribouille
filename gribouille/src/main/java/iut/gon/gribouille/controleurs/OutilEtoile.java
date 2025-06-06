@@ -10,12 +10,18 @@ public class OutilEtoile extends Outil {
 	public OutilEtoile(Controller c) {
 		super(c);
 	}
-
-	public void onMousePress(double x, double y) {
-        controller.figureCourante = new Etoile(1, "black", x, y);
+	
+	public void makeForme(double x, double y) {
+		controller.figureCourante = new Etoile(controller.epaisseur.get(), controller.couleur.get().toString(), x, y);
         controller.dessin.addFigure(controller.figureCourante);
+        //controller.prevX.set(x);
+        //controller.prevY.set(y);
         x1 = x;
         y1 = y;
+	}
+
+	public void onMousePress(double x, double y) {
+        makeForme(x, y);
     }
 
     public void onMouseDrag(double x, double y) {
