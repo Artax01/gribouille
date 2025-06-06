@@ -34,29 +34,24 @@ public class CouleursController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		vbox.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-			
-			@Override
-			public void handle(MouseEvent event) {
-				if (event.getTarget() instanceof Rectangle) {
-					Rectangle selectRect = (Rectangle) event.getTarget();
-					
-					if (dernierRect != null && dernierRect != selectRect) {
-						dernierRect.setArcWidth(5);
-						dernierRect.setArcHeight(5);
-						dernierRect.setStrokeWidth(1);
-					}
-					
-					selectRect.setArcWidth(10);
-					selectRect.setArcHeight(10);
-					selectRect.setStrokeWidth(5);
-					dernierRect = selectRect;
-					controller.setCouleur((Color) selectRect.getFill());
+		vbox.setOnMouseClicked(event -> {
+			if (event.getTarget() instanceof Rectangle) {
+				Rectangle selectRect = (Rectangle) event.getTarget();
+				
+				if (dernierRect != null && dernierRect != selectRect) {
+					dernierRect.setArcWidth(5);
+					dernierRect.setArcHeight(5);
+					dernierRect.setStrokeWidth(1);
 				}
 				
+				selectRect.setArcWidth(10);
+				selectRect.setArcHeight(10);
+				selectRect.setStrokeWidth(5);
+				dernierRect = selectRect;
+				controller.setCouleur((Color) selectRect.getFill());
 			}
-			
 		});
+			
 	}
 
 }

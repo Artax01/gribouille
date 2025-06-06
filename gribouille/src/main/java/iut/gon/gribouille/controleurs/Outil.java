@@ -11,6 +11,8 @@ public abstract class Outil {
 		controller = c;
 	}
 	
+	public void makeForme(double x, double y) {};
+	
 	public void onMousePress(double x, double y) {};
 
 	public void onMouseDrag(double x, double y) {};

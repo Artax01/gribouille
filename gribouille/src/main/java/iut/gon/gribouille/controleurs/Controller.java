@@ -86,43 +86,71 @@ public class Controller implements Initializable {
 		dessinController.setCouleur(couleur);
 	}
 	
+	public void updateEpaisseur() {
+		figureCourante = figureCourante.changeEpaisseur(epaisseur.get());
+		dessin.addFigure(figureCourante);
+	}
+	
+	public void updateCouleur() {
+		figureCourante = figureCourante.changeCouleur(couleur.get().toString());
+		dessin.addFigure(figureCourante);
+	}
+	
+	public void updateForme() {
+		if (outilCourant != null) {
+			outilCourant.makeForme(prevX.get(), prevY.get());
+		}
+	}
+	
 	public void onKeyPressed(String key) {
 		switch(key.toLowerCase()) {
 			case ")":
 				if (epaisseur.get() > 1) this.setEpaisseur(epaisseur.get() - 1);
+				updateEpaisseur();
 				break;
 			case "=":
 				if (epaisseur.get() + 1 <= 9) this.setEpaisseur(epaisseur.get() + 1);
+				updateEpaisseur();
 				break;
 			case "c":
 				onCrayon();
+				updateForme();
 				break;
 			case "e":
 				onEtoile();
+				updateForme();
 				break;
 			case "&":
 				setCouleur(Color.RED);
+				updateCouleur();
 				break;
 			case "é":
 				setCouleur(Color.LIME);
+				updateCouleur();
 				break;
 			case "\"":
 				setCouleur(Color.BLUE);
+				updateCouleur();
 				break;
 			case "'":
 				setCouleur(Color.CYAN);
+				updateCouleur();
 				break;
 			case "(":
 				setCouleur(Color.PINK);
+				updateCouleur();
 				break;
 			case "-":
 				setCouleur(Color.YELLOW);
+				updateCouleur();
 				break;
 			case "è":
 				setCouleur(Color.BLACK);
+				updateCouleur();
 				break;
 			case "_":
 				setCouleur(Color.WHITE);
+				updateCouleur();
 				break;
 			default:
 				break;
