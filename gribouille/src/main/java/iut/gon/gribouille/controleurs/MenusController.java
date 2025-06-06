@@ -38,7 +38,7 @@ public class MenusController implements Initializable {
     	
     	epaisseurGroup.selectedToggleProperty().addListener((observableValue, oldValue, newValue) -> {
     		if (newValue != null) {
-    			controller.dessinController.setEpaisseur(Integer.parseInt(((RadioMenuItem) newValue).getText()));
+    			controller.setEpaisseur(Integer.parseInt(((RadioMenuItem) newValue).getText()));
     		}
     	});
 	}

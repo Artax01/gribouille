@@ -51,7 +51,7 @@ public class CouleursController implements Initializable {
 					selectRect.setArcHeight(10);
 					selectRect.setStrokeWidth(5);
 					dernierRect = selectRect;
-					controller.dessinController.setCouleur((Color) selectRect.getFill());
+					controller.setCouleur((Color) selectRect.getFill());
 				}
 				
 			}

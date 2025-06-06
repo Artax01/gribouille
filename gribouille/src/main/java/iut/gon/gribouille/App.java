@@ -24,11 +24,16 @@ public class App extends Application {
         scene = new Scene(loadFXML("CadreGribouille"), 800, 480);
         stage.setTitle(controleur.dessin.getNomDuFichier());
         stage.setScene(scene);
-        stage.show();
+        
+        stage.getScene().setOnKeyPressed(evt -> {
+        	controleur.onKeyPressed(evt.getText());
+        });
         
         stage.setOnCloseRequest((evt) -> {
         	controleur.onCloseRequest(evt);
         });
+        
+        stage.show();
     }
 
     static void setRoot(String fxml) throws IOException {
@@ -42,7 +47,7 @@ public class App extends Application {
     }
 
     public static void main(String[] args) {
-        launch();
+        launch(args);
     }
 
 }

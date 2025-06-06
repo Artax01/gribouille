@@ -78,10 +78,55 @@ public class Controller implements Initializable {
 	
 	public void setEpaisseur(int epaisseur) {
 		this.epaisseur.set(epaisseur);
+		dessinController.setEpaisseur(epaisseur);
 	}
 	
 	public void setCouleur(Color couleur) {
 		this.couleur.set(couleur);
+		dessinController.setCouleur(couleur);
+	}
+	
+	public void onKeyPressed(String key) {
+		switch(key.toLowerCase()) {
+			case ")":
+				if (epaisseur.get() > 1) this.setEpaisseur(epaisseur.get() - 1);
+				break;
+			case "=":
+				if (epaisseur.get() + 1 <= 9) this.setEpaisseur(epaisseur.get() + 1);
+				break;
+			case "c":
+				onCrayon();
+				break;
+			case "e":
+				onEtoile();
+				break;
+			case "&":
+				setCouleur(Color.RED);
+				break;
+			case "é":
+				setCouleur(Color.LIME);
+				break;
+			case "\"":
+				setCouleur(Color.BLUE);
+				break;
+			case "'":
+				setCouleur(Color.CYAN);
+				break;
+			case "(":
+				setCouleur(Color.PINK);
+				break;
+			case "-":
+				setCouleur(Color.YELLOW);
+				break;
+			case "è":
+				setCouleur(Color.BLACK);
+				break;
+			case "_":
+				setCouleur(Color.WHITE);
+				break;
+			default:
+				break;
+		}
 	}
 
 	public boolean onQuitter() {
