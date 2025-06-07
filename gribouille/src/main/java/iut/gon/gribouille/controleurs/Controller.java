@@ -168,15 +168,38 @@ public class Controller implements Initializable {
 	}
 	
 	public void onCharge() {
-		FileChooser selecteur = new FileChooser();
-		selecteur.setTitle("Charger un dessin");
-		selecteur.getExtensionFilters().add(new FileChooser.ExtensionFilter("Fichiers gribouille", "*.grb"));
-		File fichier = selecteur.showOpenDialog(Window.getWindows().get(0));
-		if (fichier != null) {
-			dessin.charge(fichier.getAbsolutePath());
-			dessin.setNomDuFichier(fichier.getName());
-			dessinController.efface();
-			dessine();
+		boolean isError = false;
+		
+		if (dessin.estModifieProperty().get()) {
+			Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.YES, ButtonType.NO);
+			alert.setTitle("Fichier non enregistré");
+			alert.setHeaderText("Votre dessin n'a pas encore était sauvergardé. Voulez-vous l'enregistrer ?");
+			Optional<ButtonType> result = alert.showAndWait();
+			
+			if (result.get() == ButtonType.YES) {
+				try {
+					onSauvegarde();
+				}
+				catch (Exception e) {
+					isError = true;
+				}
+			}
+			else if (result.get() == ButtonType.NO) {
+				alert.close();
+			}
+		}
+		
+		if (isError == false) {
+			FileChooser selecteur = new FileChooser();
+			selecteur.setTitle("Charger un dessin");
+			selecteur.getExtensionFilters().add(new FileChooser.ExtensionFilter("Fichiers gribouille", "*.grb"));
+			File fichier = selecteur.showOpenDialog(Window.getWindows().get(0));
+			if (fichier != null) {
+				dessin.charge(fichier.getAbsolutePath());
+				dessin.setNomDuFichier(fichier.getName());
+				dessinController.efface();
+				dessine();
+			}
 		}
 	}
 	
@@ -221,7 +244,7 @@ public class Controller implements Initializable {
 	}
 	
 	public void onEffacerTout() {
-		Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.YES, ButtonType.NO);
+		Alert alert = new Alert(Alert.AlertType.WARNING, "", ButtonType.YES, ButtonType.NO);
 		alert.setHeaderText("Cette action est irreversible !");
 		alert.setContentText("Voulez-vous vraiment effacer tout le dessin ?");
 		Optional<ButtonType> result = alert.showAndWait();
@@ -233,16 +256,14 @@ public class Controller implements Initializable {
 
 	public boolean onQuitter() {
 		if (dessin.estModifieProperty().get()) {
-			Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.CLOSE, ButtonType.YES, ButtonType.CANCEL);
+			Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
 			alert.setTitle("Fichier non enregistré");
-			alert.setHeaderText("Votre dessin n'a pas encore était sauvergardé, que voulez-vous faire ?");
-			alert.setContentText("YES = sauvergader; CLOSE = fermer sans sauvergarder; CANCEL = annuler");
+			alert.setHeaderText("Votre dessin n'a pas encore était sauvergardé. Voulez-vous l'enregistrer ?");
 			Optional<ButtonType> result = alert.showAndWait();
 			
 			if (result.get() == ButtonType.YES) {
 				try {
 					onSauvegarde();
-					return false;
 				}
 				catch (Exception e) {
 					System.out.println(e.getMessage());
@@ -252,18 +273,9 @@ public class Controller implements Initializable {
 			else if (result.get() == ButtonType.CANCEL) {
 				return false;
 			}
-			else if (result.get() == ButtonType.CLOSE) {
-				if (Dialogues.confirmation()) {
-					return true;
-				}
-				return false;
-			}
 		}
 		
-		if (Dialogues.confirmation()) {
-			return true;
-		}
-		return false;
+		return Dialogues.confirmation();
 	}
 
 	public void onCloseRequest(WindowEvent evt) {

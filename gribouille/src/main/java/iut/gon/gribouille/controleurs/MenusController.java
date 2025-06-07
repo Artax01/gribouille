@@ -68,7 +68,8 @@ public class MenusController implements Initializable {
     }
     
     public void onAPropos() {
-    	Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.YES);
+    	Alert alert = new Alert(Alert.AlertType.INFORMATION, "", ButtonType.OK);
+    	alert.setTitle("A Propos");
 		alert.setHeaderText("Logiciel Gribouille: Réalisé par XXX");
 		alert.setContentText("Le projet Gribouille est un logiciel de dessin écrit en Java/JavaFX.");
 		alert.showAndWait();

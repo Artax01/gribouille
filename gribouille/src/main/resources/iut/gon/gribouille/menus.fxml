@@ -13,6 +13,8 @@
 		<MenuItem text="Sauvergarder" onAction="#onSauvegarde"/>
 		<MenuItem text="Exporter" onAction="#onExporte"/>
 		<SeparatorMenuItem/>
+		<MenuItem text="Effacer tout" onAction="#onEffacerTout"/>
+		<SeparatorMenuItem/>
 		<MenuItem text="Quitter" onAction="#onQuitte"/>
 	</Menu>
 	<Menu text="Outils">
@@ -39,7 +41,7 @@
 		<RadioMenuItem text="Etoile" toggleGroup="$outilGroup" fx:id="etoile"/>
  	</Menu>
  	<Menu text="Bonus">
-		<MenuItem text="Effacer tout" onAction="#onEffacerTout"/>
+		<!-- TODO -->
 	</Menu>
  	<Menu text="Aide">
  		<MenuItem text="A propos" onAction="#onAPropos"/>
