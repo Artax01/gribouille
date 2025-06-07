@@ -8,18 +8,22 @@
 <?import javafx.scene.control.ToggleGroup?>
 
 <MenuBar xmlns="http://javafx.com/javafx/21.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iut.gon.gribouille.controleurs.MenusController">
-	<Menu text="Dessin">
+	<Menu text="Fichier">
 		<MenuItem text="Charger" onAction="#onCharge"/>
 		<MenuItem text="Sauvergarder" onAction="#onSauvegarde"/>
 		<MenuItem text="Exporter" onAction="#onExporte"/>
 		<SeparatorMenuItem/>
-		<MenuItem text="Effacer tout" onAction="#onEffacerTout"/>
-		<SeparatorMenuItem/>
 		<MenuItem text="Quitter" onAction="#onQuitte"/>
+	</Menu>
+	<Menu text="Edition">
+		<MenuItem text="Retour arrière" disable="true"/>
+		<MenuItem text="Retour avant" disable="true"/>
+		<SeparatorMenuItem/>
+		<MenuItem text="Effacer tout" onAction="#onEffacerTout"/>
 	</Menu>
 	<Menu text="Outils">
 		<Menu text="Epaisseur">
-			<RadioMenuItem text="1" selected="true">
+			<RadioMenuItem text="1">
 				<toggleGroup>
 					<ToggleGroup fx:id="epaisseurGroup"/>
 				</toggleGroup>
@@ -32,18 +36,18 @@
 			<RadioMenuItem text="7" toggleGroup="$epaisseurGroup"/>
 			<RadioMenuItem text="8" toggleGroup="$epaisseurGroup"/>
 			<RadioMenuItem text="9" toggleGroup="$epaisseurGroup"/>
-		</Menu>		
+		</Menu>
+		<SeparatorMenuItem/>
 		<RadioMenuItem text="Crayon" selected="true" fx:id="crayon">
 			<toggleGroup>
 				<ToggleGroup fx:id="outilGroup"/>
 			</toggleGroup>
 		</RadioMenuItem>
 		<RadioMenuItem text="Etoile" toggleGroup="$outilGroup" fx:id="etoile"/>
+		<RadioMenuItem text="Gomme" toggleGroup="$outilGroup" fx:id="gomme" disable="true"/>
  	</Menu>
- 	<Menu text="Bonus">
-		<!-- TODO -->
-	</Menu>
  	<Menu text="Aide">
+ 		<MenuItem text="Mappage" disable="true"/>
  		<MenuItem text="A propos" onAction="#onAPropos"/>
  	</Menu>
 </MenuBar>

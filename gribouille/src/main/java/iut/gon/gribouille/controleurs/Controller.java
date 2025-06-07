@@ -49,6 +49,10 @@ public class Controller implements Initializable {
 		statutController.yCoordinate.textProperty().bind(prevY.asString("%.0f"));
 		statutController.epaisseur.textProperty().bind(epaisseur.asString());
 		statutController.couleur.textProperty().bind(couleur.asString());
+		
+		epaisseur.addListener((observableValue, oldValue, newValue) -> {
+	        menusController.epaisseurGroup.selectToggle(menusController.epaisseurGroup.getToggles().get(newValue.intValue() - 1));
+	    });
 	}
 	
 	public void onCrayon() {
@@ -97,13 +101,17 @@ public class Controller implements Initializable {
 	}
 	
 	public void updateEpaisseur() {
-		figureCourante = figureCourante.changeEpaisseur(epaisseur.get());
-		dessin.addFigure(figureCourante);
+		if (figureCourante != null) {
+			figureCourante = figureCourante.changeEpaisseur(epaisseur.get());
+			dessin.addFigure(figureCourante);
+		}
 	}
 	
 	public void updateCouleur() {
-		figureCourante = figureCourante.changeCouleur(couleur.get().toString());
-		dessin.addFigure(figureCourante);
+		if (figureCourante != null) {
+			figureCourante = figureCourante.changeCouleur(couleur.get().toString());
+			dessin.addFigure(figureCourante);
+		}
 	}
 	
 	public void updateForme() {

@@ -25,6 +25,8 @@ public class MenusController implements Initializable {
 
     public void setControleur(Controller c) {
     	this.controller = c;
+    	
+    	epaisseurGroup.selectToggle(epaisseurGroup.getToggles().get(controller.epaisseur.get() - 1));
     }
 
     @Override
@@ -46,9 +48,7 @@ public class MenusController implements Initializable {
     		if (newValue != null) {
     			controller.setEpaisseur(Integer.parseInt(((RadioMenuItem) newValue).getText()));
     		}
-    	});
-    	
-    	
+    	});    	
 	}
     
     public void onCharge() {
